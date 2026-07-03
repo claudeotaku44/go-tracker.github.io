@@ -1,0 +1,558 @@
+/* --- CSS Variables for Easy Theming --- */
+:root{
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-green: #10b981;
+  /* Emerald green */
+  --accent-red: #ef4444;
+  /* Soft crimson */
+  --accent-brand: #3b82f6;
+  /* Blue for active states */
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body{
+  font-family: "Inter", sans-serif;
+  color: var(--text-main);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  padding-top: 80px;
+  overflow-x: hidden;
+}
+
+img, svg{
+  max-width: 100%;
+  display: block;
+}
+
+/* --- Layout & Container --- */
+.container{
+  width: 100%;
+  max-width: 800px;
+  /* Constrain width for a better reading experience */
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-section
+{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo
+{
+  font-size: clamp(1.5rem, 4vw + 0.5rem, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(to right, #f8fafc, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-profile
+{
+  position: absolute;
+  top: 90px;
+  right: clamp(16px, 4vw, 40px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 10px 14px;
+  backdrop-filter: blur(12px);
+  max-width: calc(100% - 80px);
+  z-index: 100;
+}
+
+.home-greeting__name
+{
+  overflow-wrap: anywhere;
+}
+
+.home-avatar
+{
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  display: grid;
+  place-items: center;
+  color: var(--text-main);
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.home-avatar img
+{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-greeting
+{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: var(--text-main);
+}
+
+.home-greeting__label
+{
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.home-greeting__name
+{
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* --- Premium Cards --- */
+.card
+{
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover
+{
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+}
+
+/* Total Balance Card */
+.total
+{
+  width: 100%;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.total span.label
+{
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.total span.amount
+{
+  font-size: clamp(2rem, 6vw + 0.5rem, 3.5rem);
+  font-weight: 700;
+  line-height: 1;
+  word-break: break-word;
+}
+
+/* Income & Lost Grid */
+.transaction-grid
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.stat-card
+{
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.stat-card .label
+{
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.stat-card .amount
+{
+  font-size: clamp(1.3rem, 4vw + 0.3rem, 2rem);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.income .amount
+{
+  color: var(--accent-green);
+}
+
+.lost .amount
+{
+  color: var(--accent-red);
+}
+
+.pints
+{
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.income .pints
+{
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
+}
+
+.lost .pints
+{
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--accent-red);
+}
+
+/* --- Desktop Navbar --- */
+.navbar
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 15px clamp(16px, 5vw, 50px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.nav-logo
+{
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-logo span
+{
+  color: var(--accent-brand);
+}
+
+.nav-links
+{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+}
+
+.nav-links a
+{
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 8px 18px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active
+{
+  color: var(--text-main);
+  background: var(--glass-bg);
+}
+
+/* --- Mobile Responsiveness --- */
+@media screen and (max-width: 768px)
+{
+  body
+  {
+    padding-top: 20px;
+    padding-bottom: 100px;
+  }
+
+  .container
+  {
+    padding: 15px;
+  }
+
+  .navbar
+  {
+    top: auto;
+    bottom: 0;
+    padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
+    border-bottom: none;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .nav-logo
+  {
+    display: none;
+  }
+
+  .nav-links
+  {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .nav-links a
+  {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .transaction-grid
+  {
+    grid-template-columns: 1fr;
+    /* Stack cards on mobile */
+    gap: 15px;
+  }
+
+  .home-profile
+  {
+    position: static;
+    margin: -25px auto 20px;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .total
+  {
+    padding: 30px 20px;
+  }
+
+  .total span.amount
+  {
+    font-size: 2.5rem;
+  }
+
+  .stat-card
+  {
+    padding: 25px 15px;
+  }
+
+  .stat-card .amount
+  {
+    font-size: 1.5rem;
+  }
+
+  .logo
+  {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 480px)
+{
+  body
+  {
+    padding-top: 16px;
+    padding-bottom: 90px;
+  }
+
+  .container
+  {
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  .header-section
+  {
+    margin-bottom: 20px;
+  }
+
+  .logo
+  {
+    font-size: 1.5rem;
+  }
+
+  .navbar
+  {
+    padding: 12px 8px;
+  }
+
+  .nav-links a
+  {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+
+  .total
+  {
+    padding: 25px 15px;
+    margin-bottom: 18px;
+  }
+
+  .total span.label
+  {
+    font-size: 0.85rem;
+  }
+
+  .total span.amount
+  {
+    font-size: 2rem;
+  }
+
+  .stat-card
+  {
+    padding: 20px 12px;
+  }
+
+  .stat-card .label
+  {
+    font-size: 0.8rem;
+  }
+
+  .stat-card .amount
+  {
+    font-size: 1.3rem;
+  }
+
+  .pints
+  {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+
+  .home-greeting__name
+  {
+    font-size: 0.85rem;
+  }
+
+  .home-greeting__label
+  {
+    font-size: 0.65rem;
+  }
+
+  .home-avatar
+  {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
+/* --- Extra-small phones (older/small-screen devices) --- */
+@media screen and (max-width: 360px)
+{
+  .container
+  {
+    padding: 10px;
+  }
+
+  .total span.amount
+  {
+    font-size: 1.7rem;
+  }
+
+  .stat-card .amount
+  {
+    font-size: 1.15rem;
+  }
+
+  .nav-links a
+  {
+    font-size: 0.68rem;
+    padding: 6px 4px;
+  }
+}
+
+/* --- Short / landscape viewports (mobile browsers with limited height) --- */
+@media screen and (max-width: 900px) and (max-height: 480px) and (orientation: landscape)
+{
+  body
+  {
+    padding-top: 70px;
+    padding-bottom: 20px;
+  }
+
+  .navbar
+  {
+    top: 0;
+    bottom: auto;
+    border-top: none;
+    border-bottom: 1px solid var(--glass-border);
+    padding: 8px clamp(10px, 3vw, 24px) 8px;
+    padding-bottom: 8px;
+  }
+
+  .nav-logo
+  {
+    display: block;
+    font-size: 1rem;
+  }
+
+  .nav-links a
+  {
+    flex-direction: row;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .home-profile
+  {
+    position: static;
+    margin: 0 auto 16px;
+  }
+
+  .total
+  {
+    padding: 18px 20px;
+  }
+}
+
+/* --- Tablet / mid-size laptop fine-tuning --- */
+@media screen and (min-width: 769px) and (max-width: 1024px)
+{
+  .navbar
+  {
+    padding: 15px 24px;
+  }
+
+  .container
+  {
+    max-width: 90%;
+  }
+}

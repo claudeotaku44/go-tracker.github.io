@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Go Tracker is a responsive personal finance dashboard for tracking income, expenses, and account activity.">
+    <meta name="theme-color" content="#0f172a">
+    <title>Go Tracker - Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/index.css">
+   <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-logo">Go<span> Tracker</span></div>
+      <ul class="nav-links">
+        <li><a href="./index.html" class="active">Home</a></li>
+        <li><a href="./pages/history.html">Transactions</a></li>
+        <li><a href="./pages/add.html">Add Transaction</a></li>
+        <li><a href="./pages/setting.html">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="header-section">
+        <div class="home-profile" id="home-profile">
+          <div class="home-avatar" id="home-avatar">U</div>
+          <div class="home-greeting">
+            <span class="home-greeting__label">Welcome back</span>
+            <span class="home-greeting__name" id="home-greeting-name">User</span>
+          </div>
+        </div>
+      </div>
+      <div class="logo"><img src="./assets/launchericon-144x144.png" alt=""></div>
+      <div class="card total">
+        <span class="label">Total Balance</span>
+        <span class="amount">$0.00</span>
+      </div>
+      <div class="transaction-grid">
+        <div class="card stat-card income">
+          <span class="label">Total Income</span>
+          <span class="amount">$0.00</span>
+          <span class="pints">++ trending up</span>
+        </div>
+        <div class="card stat-card lost">
+          <span class="label">Total Expenses</span>
+          <span class="amount">$0.00</span>
+          <span class="pints">-- trending down</span>
+        </div>
+      </div>
+    </div>
+    <script src="js/app.js"></script>
+  </body>
+</html>

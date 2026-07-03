@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Add income or expense transactions quickly with the responsive Go Tracker transaction form."
+    />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Add - Go Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/add.css" />
+    <link rel="icon" href=""/>
+  </head>
+  <body>
+    <nav class="navbar">
+   <div class="nav-logo">Go<span> Tracker</span></div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./history.html">Transactions</a></li>
+        <li><a href="./add.html" class="active">Add</a></li>
+        <li><a href="./setting.html">Profile</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="header-section">
+        <h2 class="page-title">New Transaction</h2>
+      </div>
+
+      <form class="card" novalidate>
+        <div class="form-group">
+          <label>Transaction Title</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="e.g., Grocery Shopping"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Amount ($)</label>
+          <input type="number" class="form-control" placeholder="0.00" />
+        </div>
+
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-control">
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        <button type="button" class="btn-submit">Save Transaction</button>
+      </form>
+    </div>
+    <script src="../js/app.js" defer></script>
+  </body>
+</html>

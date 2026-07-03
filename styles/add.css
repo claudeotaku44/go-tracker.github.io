@@ -1,0 +1,350 @@
+:root
+{
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-brand: #3b82f6;
+}
+
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html
+{
+  -webkit-text-size-adjust: 100%;
+}
+
+body
+{
+  font-family: "Inter", sans-serif;
+  color: var(--text-main);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: 80px;
+  overflow-x: hidden;
+}
+
+.container
+{
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+.header-section
+{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-title
+{
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 700;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.card
+{
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+/* Form Styles */
+.form-group
+{
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label
+{
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-control
+{
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.form-control:focus
+{
+  border-color: var(--accent-brand);
+}
+
+.btn-submit
+{
+  background: var(--accent-brand);
+  color: #fff;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 10px;
+}
+
+.btn-submit:hover
+{
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* Navbar */
+.navbar
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 15px clamp(16px, 5vw, 50px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.nav-logo
+{
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.nav-logo span
+{
+  color: var(--accent-brand);
+}
+
+.nav-links
+{
+  display: flex;
+  gap: 10px;
+  list-style: none;
+}
+
+.nav-links a
+{
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 8px 18px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active
+{
+  color: var(--text-main);
+  background: var(--glass-bg);
+}
+
+@media screen and (max-width: 768px)
+{
+  body
+  {
+    padding-top: 20px;
+    padding-bottom: 100px;
+  }
+
+  .container
+  {
+    padding: 15px;
+  }
+
+  .navbar
+  {
+    top: auto;
+    bottom: 0;
+    border-bottom: none;
+    border-top: 1px solid var(--glass-border);
+    padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .nav-logo
+  {
+    display: none;
+  }
+
+  .nav-links
+  {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .nav-links a
+  {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .page-title
+  {
+    font-size: 1.8rem;
+  }
+
+  .card
+  {
+    padding: 25px;
+  }
+
+  .form-control
+  {
+    padding: 10px 12px;
+  }
+}
+
+@media screen and (max-width: 480px)
+{
+  body
+  {
+    padding-top: 16px;
+    padding-bottom: 90px;
+  }
+
+  .container
+  {
+    padding: 12px;
+  }
+
+  .navbar
+  {
+    padding: 10px 8px;
+  }
+
+  .nav-links a
+  {
+    font-size: 0.75rem;
+    padding: 8px 6px;
+  }
+
+  .page-title
+  {
+    font-size: 1.5rem;
+  }
+
+  .card
+  {
+    padding: 20px;
+  }
+
+  .form-group
+  {
+    margin-bottom: 15px;
+  }
+
+  .form-group label
+  {
+    font-size: 0.85rem;
+  }
+
+  .form-control
+  {
+    padding: 9px 10px;
+    font-size: 1rem;
+  }
+
+  .btn-submit
+  {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* --- Extra-small phones --- */
+@media screen and (max-width: 360px)
+{
+  .container
+  {
+    padding: 10px;
+  }
+
+  .card
+  {
+    padding: 16px;
+  }
+
+  .nav-links a
+  {
+    font-size: 0.68rem;
+    padding: 8px 4px;
+  }
+}
+
+/* --- Short / landscape viewports --- */
+@media screen and (max-width: 900px) and (max-height: 480px) and (orientation: landscape)
+{
+  body
+  {
+    padding-top: 70px;
+    padding-bottom: 20px;
+  }
+
+  .navbar
+  {
+    top: 0;
+    bottom: auto;
+    border-top: none;
+    border-bottom: 1px solid var(--glass-border);
+    padding: 8px clamp(10px, 3vw, 24px);
+  }
+
+  .nav-links a
+  {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .card
+  {
+    padding: 20px;
+  }
+}
+
+/* --- Tablet / mid-size laptop fine-tuning --- */
+@media screen and (min-width: 769px) and (max-width: 1024px)
+{
+  .navbar
+  {
+    padding: 15px 24px;
+  }
+
+  .container
+  {
+    max-width: 70%;
+  }
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Manage profile, preferences, and export transactions from the Go Tracker account settings page."
+    />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Profile - Go Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/setting.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+       <div class="nav-logo">Go<span> Tracker</span></div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./history.html">Transactions</a></li>
+        <li><a href="./add.html">Add</a></li>
+        <li><a href="./setting.html" class="active">Profile</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="card profile-header">
+        <div class="avatar">JS</div>
+        <div class="profile-name">John Smith</div>
+        <div class="profile-email">john.smith@example.com</div>
+      </div>
+
+      <div class="card">
+        <ul class="settings-list">
+          <li data-action="account">
+            <span>Account Settings</span> <span>→</span>
+          </li>
+          <li data-action="preferences">
+            <span>Preferences</span> <span>→</span>
+          </li>
+          <li data-action="export"><span>Export Data</span> <span>→</span></li>
+          <li data-action="help"><span>Help & Support</span> <span>→</span></li>
+        </ul>
+      </div>
+
+      <div
+        class="card settings-action-card hidden"
+        id="settings-action-card"
+      ></div>
+
+      <button class="btn-logout">Log Out</button>
+    </div>
+  </body>
+  <script src="../js/app.js" defer></script>
+</html>
