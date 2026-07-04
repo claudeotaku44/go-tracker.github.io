@@ -1,12 +1,88 @@
 @import url(./utils/theme.css);
 
-html
-{
-  -webkit-text-size-adjust: 100%;
+/* Reset and Core Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-  background: url("../assets/function/206173.gif") center/cover;
-  width: 100vw;
-  height: 100vh;
+html {
+    -webkit-text-size-adjust: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean, modern font fallback */
+}
+
+body {
+    background: url("../assets/function/206173.gif") center/cover no-repeat;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Glassmorphic Error Container */
+.error-container {
+    background: rgba(255, 255, 255, 0.1); /* Translucent white */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    color: #ffffff; /* Assumes a dark/vibrant background GIF; tweak if your GIF is bright white */
+}
+
+/* Typography Customization */
+.error-code {
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #ff7b00, #ffae00); /* Adds a pop of color */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.error-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.error-message {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* Call-to-Action Button */
+.home-button {
+    display: inline-block;
+    text-decoration: none;
+    background: #ffffff;
+    color: #111111;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Interactive Hover States */
+.home-button:hover {
+    background: #ff7b00;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 123, 0, 0.4);
+}
+
+.home-button:active {
+    transform: translateY(-1px);
 }

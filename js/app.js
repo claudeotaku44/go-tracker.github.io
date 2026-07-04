@@ -946,6 +946,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-          if  ("serviceWorker" in navigator ){
-      navigator.serviceWorker.register("/sw.js")
-    } 
+async function register() {
+  if ("serviceWorker" in navigator) {
+    try {
+      // Use an absolute path starting with a forward slash '/'
+      const registration = await navigator.serviceWorker.register("/js/sw.js");
+      console.log("Service Worker registered successfully:", registration);
+    } catch (error) {
+      console.log("Service Worker registration failed:", error);
+    }
+  }
+}
+
+window.addEventListener("load", register);
