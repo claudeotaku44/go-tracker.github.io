@@ -1,23 +1,5 @@
-/* --- CSS Variables for Easy Theming --- */
-:root{
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent-green: #10b981;
-  /* Emerald green */
-  --accent-red: #ef4444;
-  /* Soft crimson */
-  --accent-brand: #3b82f6;
-  /* Blue for active states */
-}
+@import url(./theme.css);
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 html{
   -webkit-text-size-adjust: 100%;

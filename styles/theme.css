@@ -1,0 +1,15 @@
+:root
+{
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-brand: #3b82f6;
+  --accent-red: #ef4444;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
