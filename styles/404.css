@@ -1,0 +1,12 @@
+@import url(./utils/theme.css);
+
+html
+{
+  -webkit-text-size-adjust: 100%;
+}
+
+body{
+  background: url("../assets/function/206173.gif") center/cover;
+  width: 100vw;
+  height: 100vh;
+}

@@ -1,28 +1,22 @@
 <!doctype html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Secure sign in and sign up flows for Go Tracker, with password reset support and responsive auth pages."
-    />
+    <meta name="description"
+          content="Secure sign in and sign up flows for Go Tracker, with password reset support and responsive auth pages." />
     <meta name="theme-color" content="#0f172a" />
     <title>Welcome - Go Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-          <link
-      rel="shortcut icon"
-      href="../assets/logo144x144.png"
-      type="image/x-icon"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="shortcut icon" href="../assets/logo144x144.png" type="image/x-icon" />
     <link rel="stylesheet" href="../styles/auth.css" />
-     <link rel="shortcut icon" href="../assets/launchericon-144x144.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/launchericon-144x144.png" type="image/x-icon" />
+    <link rel="manifest" href="../manifest.json" />
   </head>
+
   <body>
     <div class="auth-container">
       <div class="logo-container">
@@ -38,55 +32,28 @@
         <form id="form-login" novalidate>
           <div class="form-group">
             <label>Email Address</label>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="you@example.com"
-              required
-            />
+            <input type="email" class="form-control" placeholder="you@example.com" required />
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="••••••••"
-              required
-            />
+            <input type="password" class="form-control" placeholder="••••••••" required />
           </div>
           <button type="submit" class="btn-submit">Log In</button>
-          <a href="#" class="forgot-password forgot-password-link"
-            >Forgot Password?</a
-          >
+          <a href="#" class="forgot-password forgot-password-link">Forgot Password?</a>
         </form>
 
         <form id="form-forgot" class="hidden" novalidate>
           <div class="form-group">
             <label>Email Address</label>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="you@example.com"
-              required
-            />
+            <input type="email" class="form-control" placeholder="you@example.com" required />
           </div>
           <div class="form-group">
             <label>New Password</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="New password"
-              required
-            />
+            <input type="password" class="form-control" placeholder="New password" required />
           </div>
           <div class="form-group">
             <label>Confirm New Password</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Confirm password"
-              required
-            />
+            <input type="password" class="form-control" placeholder="Confirm password" required />
           </div>
           <button type="submit" class="btn-submit">Reset Password</button>
           <a href="#" class="forgot-password back-to-login">Back to login</a>
@@ -95,30 +62,15 @@
         <form id="form-signup" class="hidden" novalidate>
           <div class="form-group">
             <label>Full Name</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="John Doe"
-              required
-            />
+            <input type="text" class="form-control" placeholder="John Doe" required />
           </div>
           <div class="form-group">
             <label>Email Address</label>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="you@example.com"
-              required
-            />
+            <input type="email" class="form-control" placeholder="you@example.com" required />
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Create a password"
-              required
-            />
+            <input type="password" class="form-control" placeholder="Create a password" required />
           </div>
           <button type="submit" class="btn-submit">Create Account</button>
         </form>
@@ -126,5 +78,7 @@
     </div>
 
     <script src="../js/app.js" defer></script>
+    <script src="../js/index.js"></script>
   </body>
+
 </html>
