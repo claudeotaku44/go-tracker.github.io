@@ -1,20 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Review recent income and expense transactions in Go Tracker with a responsive history dashboard."
+  />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Transactions - Go Tracker</title>
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-          content="Review recent income and expense transactions in Go Tracker with a responsive history dashboard." />
-    <meta name="theme-color" content="#0f172a" />
-    <title>Transactions - Go Tracker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="shortcut icon" href="../assets/launchericon-144x144.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="shortcut icon" href="../assets/logo144x144.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../styles/history.css" />
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="shortcut icon" href="../assets/logo144x144.png" type="image/x-icon" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+<link rel="stylesheet" href="../styles/history.css">
+</head>
+<body>
 
   <nav class="navbar">
     <div class="nav-logo">Go<span> Tracker</span></div>
@@ -25,13 +30,50 @@
       <li><a href="./setting.html">Profile</a></li>
     </ul>
   </nav>
-  <div class="container">
-    <div class="header-section">
-      <h2 class="page-title">Recent Transactions</h2>
-    </div>
-    <div class="card history-list"></div>
-  </div>
-  </body>
-  <script src="../js/app.js" defer></script>
 
+  <main class="container">
+    <section class="header-section">
+      <h1 class="page-title">Transactions</h1>
+    </section>
+
+    <!-- Balance Summary Widgets -->
+    <section class="card">
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="summary-label">Income</span>
+          <span class="summary-value income">$0.00</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Expense</span>
+          <span class="summary-value expense">$0.00</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Balance</span>
+          <span class="summary-value balance">$0.00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Transaction List (Populated via JS) -->
+    <section class="card">
+      <div class="history-list" id="history-container">
+        <!-- JavaScript (app.js) should inject rows styled like this template example: -->
+        <!-- 
+        <div class="t-item">
+          <div class="t-info">
+            <span class="t-title">Groceries Shopping</span>
+            <span class="t-date">July 9, 2026</span>
+          </div>
+          <div class="t-right">
+            <span class="t-amount expense">-$45.50</span>
+            <button class="delete-btn">&times;</button>
+          </div>
+        </div> 
+        -->
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/app.js" defer></script>
+</body>
 </html>
