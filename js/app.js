@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let loadingOverlay = null;
   let confirmOverlay = null;
 
+  // --- Helper Utilities ---
   const safeJsonParse = (value, fallback) => {
     try {
       return value ? JSON.parse(value) : fallback;
@@ -120,9 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
   }
 
-  function createConfirmModal() {
-    if (confirmOverlay) return confirmOverlay;
-    confirmOverlay = document.createElement("div");
+  function createConfirmModal(title = "Confirm Action", message = "Are you sure you want to proceed?") {
+    if (!confirmOverlay) {
+      confirmOverlay = document.createElement("div");
+      document.body.appendChild(confirmOverlay);
+    }
+    
     Object.assign(confirmOverlay.style, {
       position: "fixed",
       inset: "0",
@@ -135,24 +139,29 @@ document.addEventListener("DOMContentLoaded", () => {
       transition: "opacity 0.2s ease",
       padding: "20px",
     });
+    
     confirmOverlay.innerHTML = `
       <div style="background:rgba(15,23,42,0.96);border-radius:18px;width:min(420px,100%);padding:28px;color:#f8fafc;text-align:center;">
-        <div style="font-size:1.15rem;font-weight:700;margin-bottom:12px;">Confirm delete</div>
-        <div style="color:#cbd5e1;margin-bottom:24px;">Are you sure you want to delete this transaction?</div>
+        <div class="modal-title" style="font-size:1.15rem;font-weight:700;margin-bottom:12px;">${title}</div>
+        <div class="modal-msg" style="color:#cbd5e1;margin-bottom:24px;">${message}</div>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
           <button type="button" class="confirm-btn-cancel" style="background:transparent;border:1px solid rgba(255,255,255,0.18);color:#f8fafc;padding:12px 18px;border-radius:12px;cursor:pointer;min-width:110px;">Cancel</button>
-          <button type="button" class="confirm-btn-confirm" style="background:#ef4444;border:none;color:#fff;padding:12px 18px;border-radius:12px;cursor:pointer;min-width:110px;">Delete</button>
+          <button type="button" class="confirm-btn-confirm" style="background:#ef4444;border:none;color:#fff;padding:12px 18px;border-radius:12px;cursor:pointer;min-width:110px;">Proceed</button>
         </div>
       </div>
     `;
-    document.body.appendChild(confirmOverlay);
     return confirmOverlay;
   }
 
-  function showConfirmModal() {
-    const overlay = createConfirmModal();
+  function showConfirmModal(title, message, confirmBtnText = "Proceed", isDanger = true) {
+    const overlay = createConfirmModal(title, message);
     const cancelButton = overlay.querySelector(".confirm-btn-cancel");
     const confirmButton = overlay.querySelector(".confirm-btn-confirm");
+
+    if (confirmButton) {
+      confirmButton.textContent = confirmBtnText;
+      confirmButton.style.backgroundColor = isDanger ? "#ef4444" : "#10b981";
+    }
 
     overlay.style.display = "flex";
     requestAnimationFrame(() => (overlay.style.opacity = "1"));
@@ -180,7 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const currentUser = safeJsonParse(localStorage.getItem("currentUser"), null);
+  // --- Session & Route Management ---
+  let currentUser = safeJsonParse(localStorage.getItem("currentUser"), null);
   const rawPath = window.location.pathname.replace(/\\/g, "/");
   const currentFile = rawPath.split("/").pop() || "index.html";
   const isInPagesFolder = rawPath.includes("/pages/");
@@ -209,6 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // --- Navigation Layout Sync ---
   const navLinks = document.querySelectorAll(".nav-links a");
   navLinks.forEach((link) => {
     link.classList.remove("active");
@@ -228,6 +239,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // --- Helper: Avatar Render Engine ---
+  function renderAvatarElement(container, user) {
+    if (!container || !user) return;
+    container.innerHTML = "";
+    if (user.avatar) {
+      const img = document.createElement("img");
+      img.src = user.avatar;
+      img.alt = user.name ? `${user.name} avatar` : "User avatar";
+      Object.assign(img.style, {
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        borderRadius: "50%"
+      });
+      container.appendChild(img);
+    } else {
+      const initials = user.name ? user.name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "U";
+      container.textContent = initials;
+    }
+  }
+
+  // --- Index Dashboard View Logic ---
   if (isIndexPage) {
     const totalBalanceNode = document.querySelector(".total .amount");
     const incomeAmountNode = document.querySelector(".income .amount");
@@ -247,19 +280,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (expenseAmountNode) expenseAmountNode.textContent = `$${expenseTotal.toFixed(2)}`;
     if (homeGreetingName) homeGreetingName.textContent = currentUser?.name || "User";
 
-    if (homeAvatar && currentUser) {
-      homeAvatar.innerHTML = "";
-      if (currentUser.avatar) {
-        const img = document.createElement("img");
-        img.src = currentUser.avatar;
-        img.alt = currentUser.name ? `${currentUser.name} avatar` : "User avatar";
-        homeAvatar.appendChild(img);
-      } else {
-        homeAvatar.textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U";
-      }
-    }
+    renderAvatarElement(homeAvatar, currentUser);
   }
 
+  // --- Auth Flow Form Logic ---
   const tabLogin = document.getElementById("tab-login");
   const tabSignup = document.getElementById("tab-signup");
   const formLogin = document.getElementById("form-login");
@@ -361,6 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- Add Transaction Form Logic ---
   const addForm = document.querySelector("form.card");
   const saveBtn = document.querySelector(".btn-submit");
 
@@ -400,6 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- Transaction History View Logic ---
   if (isHistoryPage && currentUser) {
     const historyContainer = document.querySelector("#history-container");
     const incomeValue = document.querySelector(".summary-value.income");
@@ -455,7 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
       historyContainer.querySelectorAll(".delete-btn").forEach((button) => {
         button.addEventListener("click", async () => {
           const id = Number(button.dataset.id);
-          const confirmed = await showConfirmModal();
+          const confirmed = await showConfirmModal("Confirm delete", "Are you sure you want to delete this transaction?", "Delete", true);
           if (!confirmed) return;
 
           const currentTransactions = safeJsonParse(localStorage.getItem("transactions"), []);
@@ -470,32 +496,197 @@ document.addEventListener("DOMContentLoaded", () => {
     renderHistory();
   }
 
+  // --- Dynamic Settings Panel System ---
   if (isSettingPage && currentUser) {
     const profileName = document.querySelector(".profile-name");
     const profileEmail = document.querySelector(".profile-email");
     const avatar = document.querySelector(".avatar");
+    const settingsList = document.querySelector('.settings-list');
+    const actionCard = document.getElementById('settings-action-card');
 
-    if (profileName) profileName.textContent = currentUser.name || "User";
-    if (profileEmail) profileEmail.textContent = currentUser.email || "No email provided";
-    if (avatar) {
-      avatar.innerHTML = "";
-      if (currentUser.avatar) {
-        const img = document.createElement("img");
-        img.src = currentUser.avatar;
-        img.alt = currentUser.name ? `${currentUser.name} avatar` : "User avatar";
-        avatar.appendChild(img);
-      } else {
-        avatar.textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U";
+    const updateProfileUI = () => {
+      if (profileName) profileName.textContent = currentUser.name || "User";
+      if (profileEmail) profileEmail.textContent = currentUser.email || "No email provided";
+      renderAvatarElement(avatar, currentUser);
+    };
+
+    // Initial load sync
+    updateProfileUI();
+
+    // Functional Content Templates
+    const templates = {
+      account: () => `
+        <h3>Account Settings</h3>
+        <form id="account-form" class="settings-form">
+          <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px; align-items:center;">
+            <div id="settings-avatar-preview" style="width:72px; height:72px; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:bold; overflow:hidden;"></div>
+            <label for="avatar-upload" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:6px 14px; border-radius:8px; font-size:0.85rem; cursor:pointer; font-weight:500; transition: background 0.2s;">
+              Change Avatar
+            </label>
+            <input type="file" id="avatar-upload" accept="image/png, image/jpeg, image/svg+xml, image/gif" style="display:none;" />
+            <span style="font-size:0.75rem; color:#cbd5e1;">Supports PNG, JPEG, SVG, or GIF</span>
+          </div>
+
+          <label for="username">Name</label>
+          <input type="text" id="username" value="${currentUser.name || ''}" required />
+          
+          <label for="email">Email Address</label>
+          <input type="email" id="email" value="${currentUser.email || ''}" required />
+          
+          <button type="submit" class="btn-save">Save Changes</button>
+        </form>
+      `,
+      preferences: () => `
+        <h3>Preferences</h3>
+        <div class="settings-form">
+          <label for="currency">Default Currency</label>
+          <select id="currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+          </select>
+          
+          <label for="notifications">
+            <input type="checkbox" id="notifications" checked /> Enable Email Alerts
+          </label>
+          
+          <button id="save-preferences" class="btn-save">Save Preferences</button>
+        </div>
+      `,
+      export: () => `
+        <h3>Export Data</h3>
+        <p>Download a copy of your transaction history for backup or external use.</p>
+        <div class="export-options">
+          <button class="btn-export" data-format="csv">Export as CSV</button>
+          <button class="btn-export" data-format="json">Export as JSON</button>
+        </div>
+      `,
+      help: () => `
+        <h3>Help & Support</h3>
+        <p>Need assistance or found a bug? Drop us a line below.</p>
+        <form id="support-form" class="settings-form">
+          <label for="message">Your Message</label>
+          <textarea id="message" rows="4" placeholder="How can we help you?" required></textarea>
+          <button type="submit" class="btn-save">Submit Ticket</button>
+        </form>
+      `
+    };
+
+    // Attach Event Handlers to Dynamic Settings Form Elements
+    const attachFormListeners = (actionType) => {
+      if (actionType === 'account') {
+        const previewBlock = document.getElementById("settings-avatar-preview");
+        const fileInput = document.getElementById("avatar-upload");
+        let localAvatarBase64 = currentUser.avatar || null;
+
+        // Populate initial settings preview 
+        renderAvatarElement(previewBlock, currentUser);
+
+        // Manage immediate File Inputs
+        fileInput?.addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const allowedTypes = ["image/png", "image/jpeg", "image/svg+xml", "image/gif"];
+          if (!allowedTypes.includes(file.type)) {
+            return showCustomAlert("Unsupported format! Please use a valid PNG, JPEG, SVG, or GIF image.", "error");
+          }
+
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            localAvatarBase64 = event.target.result;
+            // Update context placeholder structure inside current module layout view
+            renderAvatarElement(previewBlock, { name: currentUser.name, avatar: localAvatarBase64 });
+          };
+          reader.readAsDataURL(file);
+        });
+
+        document.getElementById('account-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const newName = document.getElementById('username').value.trim();
+          const newEmail = document.getElementById('email').value.trim();
+
+          const users = safeJsonParse(localStorage.getItem("users"), []);
+          const userIndex = users.findIndex(u => u.email === currentUser.email);
+
+          if (userIndex !== -1) {
+            users[userIndex].name = newName;
+            users[userIndex].email = newEmail;
+            users[userIndex].avatar = localAvatarBase64;
+            localStorage.setItem("users", JSON.stringify(users));
+          }
+
+          // Commit modifications to memory
+          currentUser.name = newName;
+          currentUser.email = newEmail;
+          currentUser.avatar = localAvatarBase64;
+          localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+          updateProfileUI();
+          showCustomAlert('Account settings updated successfully!', 'success');
+        });
       }
+
+      if (actionType === 'preferences') {
+        document.getElementById('save-preferences').addEventListener('click', () => {
+          const currency = document.getElementById('currency').value;
+          const notifications = document.getElementById('notifications').checked;
+          showCustomAlert(`Preferences Saved! Currency: ${currency} | Alerts: ${notifications ? 'Enabled' : 'Disabled'}`, 'success');
+        });
+      }
+
+      if (actionType === 'export') {
+        document.querySelectorAll('.btn-export').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const format = e.target.getAttribute('data-format');
+            showCustomAlert(`Preparing logs for download in ${format.toUpperCase()} format...`, 'success');
+          });
+        });
+      }
+
+      if (actionType === 'help') {
+        document.getElementById('support-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          showCustomAlert('Your support request has been received.', 'success');
+          document.getElementById('message').value = '';
+        });
+      }
+    };
+
+    // Central Tab Router Delegation Execution Loop
+    if (settingsList && actionCard) {
+      settingsList.addEventListener('click', (e) => {
+        const targetItem = e.target.closest('li[data-action]');
+        if (!targetItem) return;
+
+        document.querySelectorAll('.settings-list li').forEach(li => li.classList.remove('selected'));
+        targetItem.classList.add('selected');
+
+        const action = targetItem.getAttribute('data-action');
+        if (templates[action]) {
+          actionCard.innerHTML = templates[action]();
+          actionCard.classList.remove('hidden');
+          attachFormListeners(action);
+          actionCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
     }
   }
 
-  document.querySelector(".btn-logout")?.addEventListener("click", () => {
-    localStorage.removeItem("currentUser");
-    window.location.href = paths.auth;
-  });
+  // --- Central Logout Operations ---
+  const logoutBtn = document.querySelector('.btn-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      const confirmed = await showConfirmModal("Confirm Logout", "Are you sure you want to log out of Go Tracker?", "Log out", true);
+      if (confirmed) {
+        localStorage.removeItem("currentUser");
+        window.location.href = paths.auth;
+      }
+    });
+  }
 });
 
+// --- Service Worker Bootstrap ---
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js")
     .then((registration) => {
