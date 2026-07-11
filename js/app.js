@@ -28,6 +28,8 @@ const applyThemeColor = (color) => {
   });
 };
 
+//hello
+
 document.addEventListener("DOMContentLoaded", () => {
   // Global DOM references for modal and overlay singletons
   let toastContainer = null;

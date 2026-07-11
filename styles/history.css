@@ -110,6 +110,7 @@ body {
 .income { color: #10b981; }
 .expense { color: #ef4444; }
 
+
 /* --- Transaction History Components --- */
 .history-list {
   width: 100%;
@@ -118,6 +119,19 @@ body {
   padding-right: 6px;
   scrollbar-width: thin;
 }
+
+    .t-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+
 
 .t-item {
   display: flex;
