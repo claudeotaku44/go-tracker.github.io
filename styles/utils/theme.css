@@ -7,6 +7,7 @@
   --text-muted: #94a3b8;
   --accent-brand: #3b82f6;
   --accent-red: #ef4444;
+  --app-primary: #3b82f6 t;
 }
 *{
   margin: 0;
